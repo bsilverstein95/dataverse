@@ -7,11 +7,11 @@
       xmlns:jsf="http://xmlns.jcp.org/jsf">
 
     <h:head>
-    </h:head>
+    </h:head>  
 
     <h:body>
         <ui:composition template="/dataverse_template.xhtml">
-            <ui:param name="pageTitle" value="#{bundle['pageTitle.confirmEmail.pre']} - #{dataverseServiceBean.findRootDataverse().name} #{bundle.dataverse}"/>
+            <ui:param name="pageTitle" value="#{bundle['confirmEmail.pageTitle']} - #{dataverseServiceBean.findRootDataverse().name} #{bundle.dataverse}"/>
             <ui:param name="dataverse" value="#{dataverseServiceBean.findRootDataverse()}"/>
             <ui:param name="showDataverseHeader" value="false"/>
             <ui:param name="loginRedirectPage" value="dataverse.xhtml"/>
@@ -89,14 +89,14 @@
                         <f:param value="&lt;/a&gt;"/>
                     </h:outputFormat>
                     <ui:fragment rendered="#{not empty ConfirmEmailPage.user}">
-                        <div class="alert alert-info">
+                        <div class="alert alert-info">  
                             <span class="glyphicon glyphicon-info-sign"></span>
-<!--                            <h:outputFormat value="#{bundle['passwdReset.newPasswd.details']}" escape="false"> 
+                            <h:outputFormat value="#{bundle['passwdReset.newPasswd.details']}" escape="false"> 
                                 <f:param value="&lt;strong&gt;"/>
                                 <f:param value="&lt;/strong&gt;"/>
-                            </h:outputFormat>-->                 
+                            </h:outputFormat>                 
                         </div>
-<!--                        <div class="row" jsf:rendered="#{ConfirmEmailPage.isAccountUpgrade()}">
+                        <div class="row" jsf:rendered="#{ConfirmEmailPage.isAccountUpgrade()}">
                             <div class="col-sm-12">
                                 <h:outputFormat styleClass="h2 text-info show" value="#{bundle['user.updatePassword.welcome']}">
                                     <f:param value="#{systemConfig.getVersion(true)}"/>
@@ -104,8 +104,8 @@
                                 </h:outputFormat>
                                 <p class="help-block"><span class="text-danger"><span class="glyphicon glyphicon-warning-sign"/> #{bundle['user.updatePassword.warning']}</span></p>
                             </div>
-                        </div>-->
-<!--                        <div>
+                        </div>
+                        <div>
                             <h:form styleClass="form-horizontal">
                                 <div class="form-group col-sm-11">
                                     <label for="inputPassword" class="col-sm-3 control-label">
@@ -115,8 +115,8 @@
                                         <p:password id="inputPassword" label="#{bundle.passwd}" match="retypePassword" styleClass="form-control" value="#{PasswordResetPage.newPassword}"/>
                                         <p:message for="inputPassword" />
                                     </div>
-                                </div>-->
-<!--                                <div class="form-group col-sm-11">
+                                </div>
+                                <div class="form-group col-sm-11">
                                     <label for="retypePassword" class="col-sm-3 control-label">
                                         #{bundle['passwdReset.rePasswd']} <span class="glyphicon glyphicon-asterisk text-danger" title="#{bundle.requiredField}"></span>
                                     </label>
@@ -133,7 +133,7 @@
                                     <div class="col-sm-10 button-block">
                                         <p:commandButton action="#{PasswordResetPage.resetPassword()}" update="@all" value="#{bundle['passwdReset.resetBtn']}"/>
                                     </div>
-                                </div>-->
+                                </div>
                             </h:form>
                         </div>
                     </ui:fragment>

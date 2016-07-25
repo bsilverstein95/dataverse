@@ -316,6 +316,8 @@
                                     </label>
                                     <div class="col-sm-9">
                                         <p class="form-control-static">#{DataverseUserPage.currentUser.email}</p>
+                                        <!-- verify button below -->
+                                        <p:commandButton action="#{BuiltinUserPage.sendConfirmEmail()}" value="#{bundle['confirmEmail.submitRequest']}"/>
                                     </div>
                                 </div>
                                 <!-- Affiliation -->
@@ -479,7 +481,7 @@
                                 <!-- Affiliation -->
                                     <label for="affiliation" class="col-sm-3 control-label">
                                         <span data-toggle="tooltip" data-placement="auto right" class="tooltiplabel text-info" data-original-title="#{bundle['user.affiliation.tip']}">
-                                            #{bundle.affiliation}
+                                            #{bundle.affiliation}   
                                         </span>
                                     </label>
                                     <div class="col-sm-9">
@@ -509,6 +511,7 @@
                                 </ui:fragment>
                                 <div class="form-group">
                                     <div class="col-sm-12 button-block">
+                                        <!-- div block to hold trigger to send verification email on signup -->
                                         <p:commandButton id="save" styleClass="btn btn-default" tabindex="9" value="#{DataverseUserPage.editMode == 'CREATE' ? bundle['user.createBtn']:bundle.saveChanges}" action="#{DataverseUserPage.save}" update="@form,:messagePanel,:userDisplayInfoTitle" />
                                         <p:commandButton id="cancel" styleClass="btn btn-default" tabindex="10" value="#{bundle.cancel}" action="#{DataverseUserPage.cancel}" process="@this" update="@form">
                                             <p:resetInput target="@form" />

@@ -97,26 +97,25 @@ public class ConfirmEmailPage implements java.io.Serializable {
         }
         return "";
     }
-    //Huge mess below! Need to figure out what's up with this
-//    public String confirmEmail() throws ConfirmEmailException {
-//        ConfirmEmailInitResponse response;
-//        response = confirmEmailService.sendConfirm(user, false);
-//        try { if (response.isEmailFound()) {
-//            FacesContext.getCurrentInstance().addMessage(null, new FacesMessage(FacesMessage.SEVERITY_INFO, response.getMessageSummary(), response.getMessageDetail()));
-//            String authProviderId = AuthenticationProvider.PROVIDER_ID;
-//            AuthenticatedUser au = authSvc.lookupUser(builtinAuthProviderId, user.getUserIdentifier());
-//            session.setUser(au);
-//            return "/dataverse.xhtml?alias=" + dataverseService.findRootDataverse().getAlias() + "faces-redirect=true";
-//        } else {
-//            FacesContext.getCurrentInstance().addMessage(null, new FacesMessage(FacesMessage.SEVERITY_ERROR, response.getMessageSummary(), response.getMessageDetail()));
-//            return null;
-//        }
-//    
-//        } catch(Exception ex) { 
-//            String msg = "Unable to save token for " + user.getEmail();
-//            throw new ConfirmEmailException(msg, ex);
-//        }
-//    }
+//might work now...
+    public String confirmEmail() throws ConfirmEmailException {
+        ConfirmEmailAttemptResponse response = confirmEmailService.attemptEmailConfirm(user, token, token);
+        try { if (response.isConfirmed()) {
+            FacesContext.getCurrentInstance().addMessage(null, new FacesMessage(FacesMessage.SEVERITY_INFO, response.getMessageSummary(), response.getMessageDetail()));
+            String builtinAuthProviderId = BuiltinAuthenticationProvider.PROVIDER_ID;
+            AuthenticatedUser au = authSvc.lookupUser(builtinAuthProviderId, user.getIdentifier());
+            session.setUser(au);
+            return "/dataverse.xhtml?alias=" + dataverseService.findRootDataverse().getAlias() + "faces-redirect=true";
+        } else {
+            FacesContext.getCurrentInstance().addMessage(null, new FacesMessage(FacesMessage.SEVERITY_ERROR, response.getMessageSummary(), response.getMessageDetail()));
+            return null;
+        }
+    
+        } catch(Exception ex) { 
+            String msg = "Unable to save token for " + user.getEmail();
+            throw new ConfirmEmailException(msg, ex);
+        }
+    }
 
     public String getToken() {
         return token;
